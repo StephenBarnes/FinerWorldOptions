@@ -29,6 +29,7 @@ for _, control in pairs(data.raw["autoplace-control"]) do
 				richness = control.richness,
 				order = control.order .. "-FinerWorldOptions",
 				category = "resource",
+				can_be_disabled = false,
 				localised_name = {
 					"autoplace-control-names.FinerWorldOptions-extension-" .. settings.startup["FinerWorldOptions-multiplier-mode"].value,
 					control.localised_name or ("autoplace-control-names." .. control.name)

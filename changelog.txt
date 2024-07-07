@@ -1,4 +1,9 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.0.1
+Date: ..
+  Bugfixes:
+    - Removed checkboxes next to the autoplace controls, since they weren't doing anything.
+---------------------------------------------------------------------------------------------------
 Version: 1.0.0
 Date: 07. 07. 2024
   Features:
