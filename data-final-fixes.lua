@@ -22,12 +22,10 @@ local autoplaceNameToMultiplier = {} -- maps original autoplace name to new mult
 for _, control in pairs(data.raw["autoplace-control"]) do
 	if control.category == "resource" then
 		if not excludeAutoplaces[control.name] then
-			--log("Resource: " .. serpent.block(control))
 			autoplaceNameToMultiplier[control.name] = control.name .. "-FinerWorldOptions-multiplier"
 			table.insert(newAutoplaces, {
 				type = "autoplace-control",
 				name = control.name .. "-FinerWorldOptions-multiplier",
-				--intended_property = control.intended_property,
 				richness = control.richness,
 				order = control.order .. "-FinerWorldOptions",
 				category = "resource",
@@ -95,12 +93,14 @@ end
 
 -- Call function to alter the noise expressions for all resources
 for _, resource in pairs(data.raw["resource"]) do
-	if resource.autoplace.probability_expression then
-		editNoiseExpr(resource.autoplace.probability_expression)
-		log("Substituting variables in probability expression of " .. resource.name)
-	end
-	if resource.autoplace.richness_expression then
-		editNoiseExpr(resource.autoplace.richness_expression)
-		log("Substituting variables in richness expression of " .. resource.name)
+	if resource.autoplace then
+		if resource.autoplace.probability_expression then
+			editNoiseExpr(resource.autoplace.probability_expression)
+			log("Substituting variables in probability expression of " .. resource.name)
+		end
+		if resource.autoplace.richness_expression then
+			editNoiseExpr(resource.autoplace.richness_expression)
+			log("Substituting variables in richness expression of " .. resource.name)
+		end
 	end
 end
