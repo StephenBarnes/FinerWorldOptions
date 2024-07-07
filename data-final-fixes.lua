@@ -31,9 +31,13 @@ for _, control in pairs(data.raw["autoplace-control"]) do
 				richness = control.richness,
 				order = control.order .. "-FinerWorldOptions",
 				category = "resource",
-				localised_name = {"autoplace-control-names.FinerWorldOptions-extension", control.localised_name or ("autoplace-control-names." .. control.name)},
-				localised_description = {"autoplace-control-description.FinerWorldOptions-extension"},
-				-- TODO separate ones for normal vs squared vs cubed
+				localised_name = {
+					"autoplace-control-names.FinerWorldOptions-extension-" .. settings.startup["FinerWorldOptions-multiplier-mode"].value,
+					control.localised_name or ("autoplace-control-names." .. control.name)
+				},
+				localised_description = {
+					"autoplace-control-description.FinerWorldOptions-extension-" .. settings.startup["FinerWorldOptions-multiplier-mode"].value
+				},
 			})
 		end
 	end
@@ -50,8 +54,15 @@ for autoplaceName, multiplierName in pairs(autoplaceNameToMultiplier) do
 	for _, slider in pairs({"richness", "frequency", "size"}) do
 		local originalName = "control-setting:" .. autoplaceName .. ":" .. slider .. ":multiplier"
 		local multiplierName = "control-setting:" .. multiplierName .. ":" .. slider .. ":multiplier"
-		local newExpr = noise.var(originalName) * noise.var(multiplierName)
-		-- TODO handle the cases with squared and cubed
+		local newExpr
+		local mode = settings.startup["FinerWorldOptions-multiplier-mode"].value
+		if mode == "plain" then
+			newExpr = noise.var(originalName) * noise.var(multiplierName)
+		elseif mode == "squared" then
+			newExpr = noise.var(originalName) * noise.var(multiplierName) * noise.var(multiplierName)
+		elseif mode == "cubed" then
+			newExpr = noise.var(originalName) * noise.var(multiplierName) * noise.var(multiplierName) * noise.var(multiplierName)
+		end
 		substitutedSubtrees[originalName] = newExpr
 	end
 end
