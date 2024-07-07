@@ -1,0 +1,14 @@
+{
+	"name": "FinerWorldOptions",
+	"version": "1.0.0",
+	"title": "Finer World Options",
+	"author": "StephenB",
+	"factorio_version": "1.1",
+	"dependencies": [
+		"base >= 1.1",
+		"? IndustrialRevolution3 >= 3.0.0",
+		"(?) space-exploration >= 0.6.134",
+		"! rso-mod"
+	],
+	"description": "Set the world-gen options more precisely than the vanilla game's coarse controls permit."
+}
