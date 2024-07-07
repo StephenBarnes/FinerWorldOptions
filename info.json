@@ -11,5 +11,5 @@
 		"(?) space-exploration >= 0.6.134",
 		"! rso-mod"
 	],
-	"description": "Set the world-gen options more precisely than the vanilla game's coarse controls permit."
+	"description": "Set the world-gen resource options more precisely than the vanilla game's coarse controls permit."
 }
